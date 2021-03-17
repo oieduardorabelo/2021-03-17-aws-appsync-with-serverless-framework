@@ -1,0 +1,38 @@
+name: MyProjectAppSync
+schema: serverless-appsync-schema.graphql
+authenticationType: API_KEY
+apiKeys:
+  - name: ExampleApiKey
+    description: 'Example API Key'
+
+mappingTemplates:
+  - type: Query
+    field: readTodo
+    dataSource: todosTable
+  - type: Query
+    field: listTodos
+    dataSource: todosTable
+
+  - type: Mutation
+    field: createTodo
+    dataSource: createTodoFunction
+    request: false
+    response: false
+  - type: Mutation
+    field: updateTodo
+    dataSource: todosTable
+  - type: Mutation
+    field: deleteTodo
+    dataSource: todosTable
+
+dataSources:
+  - type: NONE
+    name: none
+  - type: AMAZON_DYNAMODB
+    name: todosTable
+    config:
+      tableName: !Ref TodosTable
+  - type: AWS_LAMBDA
+    name: createTodoFunction
+    config:
+      functionName: createTodo

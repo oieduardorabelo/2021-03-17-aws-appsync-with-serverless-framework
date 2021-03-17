@@ -1,0 +1,41 @@
+#set($expression = "set")
+#set($expressionValues = {})
+#set($expressionNames = {})
+
+#if(!$util.isNull($context.arguments.input.name))
+  #set($expression = "${expression} #name = :name")
+  $util.qr($expressionValues.put(":name", $util.dynamodb.toDynamoDB($context.arguments.input.name)))
+  $util.qr($expressionNames.put("#name", "name"))
+#end
+
+#if(!$util.isNull($context.arguments.input.points))
+  #if($expression != 'set')
+    #set($expression = "${expression},")
+  #end
+  #set($expression = "${expression} #points = :points")
+  $util.qr($expressionValues.put(":points", $util.dynamodb.toDynamoDB($context.arguments.input.points)))
+  $util.qr($expressionNames.put("#points", "points"))
+#end
+
+#if($expression != 'set')
+  #set($expression = "${expression},")
+#end
+#set($expression = "${expression} #updatedAt = :updatedAt")
+$util.qr($expressionValues.put(":updatedAt", $util.dynamodb.toDynamoDB($util.time.nowISO8601())))
+$util.qr($expressionNames.put("#updatedAt", "updatedAt"))
+
+{
+  "version" : "2018-05-29",
+  "operation" : "UpdateItem",
+  "key": {
+    "id" : $util.dynamodb.toDynamoDBJson($context.arguments.input.id)
+  },
+  "update" : {
+    "expression" : "${expression}",
+    "expressionNames" : $util.toJson($expressionNames),
+    "expressionValues" : $util.toJson($expressionValues)
+  },
+  "condition" : {
+    "expression": "attribute_exists(id)"
+  }
+}

@@ -1,0 +1,52 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  readTodo(input: InputReadTodo): Todo
+  listTodos(input: InputListTodos): ListTodosPage!
+}
+
+type Mutation {
+  createTodo(input: InputCreateTodo): Todo!
+  updateTodo(input: InputUpdateTodo): Todo!
+  deleteTodo(input: InputDeleteTodo): Todo!
+}
+
+type Todo {
+  id: ID!
+  name: String!
+  points: Int
+}
+
+type ListTodosPage {
+  todos: [Todo!]
+  nextToken: String
+}
+
+input InputReadTodo {
+  id: ID!
+}
+
+input InputListTodos {
+  userId: ID!
+  limit: Int!
+  nextToken: String
+}
+
+input InputCreateTodo {
+  userId: String!
+  name: String!
+  points: Int
+}
+
+input InputUpdateTodo {
+  id: ID!
+  name: String
+  points: Int
+}
+
+input InputDeleteTodo {
+  id: ID!
+}
