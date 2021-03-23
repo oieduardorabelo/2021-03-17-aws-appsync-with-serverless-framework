@@ -1,8 +1,8 @@
-let Chance = require("chance");
+import * as Chance from "chance";
 
-let when = require("../../helpers/when");
+import * as when from "../../helpers/when";
 
-let ChanceClient = new Chance();
+let ChanceClient = new Chance.default();
 
 describe("given an user, they can", () => {
   let userId = ChanceClient.string({ length: 8 });

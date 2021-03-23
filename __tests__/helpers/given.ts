@@ -1,12 +1,19 @@
-let Chance = require("chance");
+import * as Chance from "chance";
 
-let when = require('./when');
+import * as when from './when';
 
-let ChanceClient = new Chance();
+let ChanceClient = new Chance.default();
 
-async function anUserWithMultipleTodos({ count }) {
+type TAnUserWithMultipleTodosInput = {
+  count: number
+}
+type TAnUserWithMultipleTodosReturn = {
+  id: string;
+  teardown: () => Promise<void>;
+}
+async function anUserWithMultipleTodos({ count }: TAnUserWithMultipleTodosInput): Promise<TAnUserWithMultipleTodosReturn> {
   let userId = ChanceClient.string({ length: 8 });
-  let todosId = [];
+  let todosId: string[] = [];
 
   for (let todo = 0; todo <= count; todo += 1) {
     let name = ChanceClient.sentence({ words: 8 });
@@ -32,4 +39,4 @@ async function anUserWithMultipleTodos({ count }) {
   }
 }
 
-module.exports = { anUserWithMultipleTodos }
+export { anUserWithMultipleTodos }

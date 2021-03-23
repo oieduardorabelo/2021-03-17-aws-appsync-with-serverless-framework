@@ -1,6 +1,8 @@
-let graphql = require("./graphql");
+import * as graphql from "./graphql";
 
-async function anUserCallsCreateTodo(input) {
+type TInput = { [key: string]: unknown };
+
+async function anUserCallsCreateTodo(input: TInput) {
   let query = `mutation createTodo($input: InputCreateTodo!) {
     createTodo(input: $input) {
       id
@@ -19,7 +21,7 @@ async function anUserCallsCreateTodo(input) {
   return res;
 }
 
-async function anUserCallsReadTodo(input) {
+async function anUserCallsReadTodo(input: TInput) {
   let query = `query readTodo($input: InputReadTodo!) {
     readTodo(input: $input) {
       id
@@ -38,7 +40,7 @@ async function anUserCallsReadTodo(input) {
   return res;
 }
 
-async function anUserCallsUpdateTodo(input) {
+async function anUserCallsUpdateTodo(input: TInput) {
   let query = `mutation updateTodo($input: InputUpdateTodo!) {
     updateTodo(input: $input) {
       id
@@ -57,7 +59,7 @@ async function anUserCallsUpdateTodo(input) {
   return res;
 }
 
-async function anUserCallsDeleteTodo(input) {
+async function anUserCallsDeleteTodo(input: TInput) {
   let query = `mutation deleteTodo($input: InputDeleteTodo!) {
     deleteTodo(input: $input) {
       id
@@ -76,7 +78,7 @@ async function anUserCallsDeleteTodo(input) {
   return res;
 }
 
-async function anUserCallsListTodos(input) {
+async function anUserCallsListTodos(input: TInput) {
   let query = `query listTodos($input: InputListTodos!) {
     listTodos(input: $input) {
       todos {
@@ -98,7 +100,7 @@ async function anUserCallsListTodos(input) {
   return res;
 }
 
-module.exports = {
+export {
   anUserCallsCreateTodo,
   anUserCallsReadTodo,
   anUserCallsUpdateTodo,

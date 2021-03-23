@@ -1,6 +1,6 @@
 ## Build a Serverless GraphQL API with AWS AppSync and Serverless Framework
 
-- `serverless@2.29.0 `
+- `serverless@2.30.3`
 - `serverless-appsync-plugin@1.8.0`
 - `serverless-esbuild@1.9.0`
 - `serverless-export-env@1.4.1`

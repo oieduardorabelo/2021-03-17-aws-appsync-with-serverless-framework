@@ -1,5 +1,5 @@
-let given = require("../../helpers/given");
-let when = require("../../helpers/when");
+import * as given from "../../helpers/given";
+import * as when from "../../helpers/when";
 
 describe("given an user, they can", () => {
   let user;

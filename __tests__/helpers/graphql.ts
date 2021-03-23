@@ -1,14 +1,18 @@
+import * as axios from 'axios';
+
 let { GRAPHQL_API_URL, GRAPHQL_API_KEY } = process.env;
 
-let axios = require("axios");
-
-async function request({ query, variables }) {
+type TRequestInput = {
+  query: string;
+  variables: { [key: string]: unknown }
+}
+async function request({ query, variables }: TRequestInput) {
   let headers = {
     'x-api-key': GRAPHQL_API_KEY
   };
 
   try {
-    let res = await axios({
+    let res = await axios.default({
       method: "post",
       url: GRAPHQL_API_URL,
       headers,
@@ -32,7 +36,12 @@ async function request({ query, variables }) {
   }
 }
 
-function throwOnErrors({ query, variables, errors }) {
+type TThrowOnErrors = {
+  query: string;
+  variables: { [key: string]: unknown }
+  errors: axios.AxiosError
+}
+function throwOnErrors({ query, variables, errors }: TThrowOnErrors) {
   if (errors) {
     let message = `
       query: ${query.substr(0, 100)}
@@ -43,4 +52,4 @@ function throwOnErrors({ query, variables, errors }) {
   }
 }
 
-module.exports = { request };
+export { request };
