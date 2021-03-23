@@ -57,7 +57,7 @@ export type InputUpdateTodo = {
 
 export type ListTodosPage = {
   __typename?: 'ListTodosPage';
-  todos?: Maybe<Array<Todo>>;
+  todos: Array<Maybe<Todo>>;
   nextToken?: Maybe<Scalars['String']>;
 };
 
@@ -70,17 +70,17 @@ export type Mutation = {
 
 
 export type MutationCreateTodoArgs = {
-  input?: Maybe<InputCreateTodo>;
+  input: InputCreateTodo;
 };
 
 
 export type MutationUpdateTodoArgs = {
-  input?: Maybe<InputUpdateTodo>;
+  input: InputUpdateTodo;
 };
 
 
 export type MutationDeleteTodoArgs = {
-  input?: Maybe<InputDeleteTodo>;
+  input: InputDeleteTodo;
 };
 
 export type Query = {
@@ -91,12 +91,12 @@ export type Query = {
 
 
 export type QueryReadTodoArgs = {
-  input?: Maybe<InputReadTodo>;
+  input: InputReadTodo;
 };
 
 
 export type QueryListTodosArgs = {
-  input?: Maybe<InputListTodos>;
+  input: InputListTodos;
 };
 
 export type Todo = {

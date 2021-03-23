@@ -1,4 +1,4 @@
-import { AppSyncResolverHandler } from 'aws-lambda';
+import { AppSyncResolverEvent } from 'aws-lambda';
 import * as DynamoDB from 'aws-sdk/clients/dynamodb';
 import * as ulid from 'ulid';
 
@@ -7,7 +7,7 @@ import { safeEnv } from './helpers/safe-env';
 
 let DocumentClient = new DynamoDB.DocumentClient();
 
-async function handler(event: AppSyncResolverHandler<codegen.InputCreateTodo, codegen.Todo>) {
+async function handler(event: AppSyncResolverEvent<codegen.MutationCreateTodoArgs>) {
   let { userId, name, points } = event.arguments.input;
   let id = ulid.ulid();
   let createdAt = new Date().toJSON();

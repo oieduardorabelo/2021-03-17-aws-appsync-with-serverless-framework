@@ -4,14 +4,14 @@ schema {
 }
 
 type Query {
-  readTodo(input: InputReadTodo): Todo
-  listTodos(input: InputListTodos): ListTodosPage!
+  readTodo(input: InputReadTodo!): Todo
+  listTodos(input: InputListTodos!): ListTodosPage!
 }
 
 type Mutation {
-  createTodo(input: InputCreateTodo): Todo!
-  updateTodo(input: InputUpdateTodo): Todo!
-  deleteTodo(input: InputDeleteTodo): Todo!
+  createTodo(input: InputCreateTodo!): Todo!
+  updateTodo(input: InputUpdateTodo!): Todo!
+  deleteTodo(input: InputDeleteTodo!): Todo!
 }
 
 type Todo {
@@ -21,7 +21,7 @@ type Todo {
 }
 
 type ListTodosPage {
-  todos: [Todo!]
+  todos: [Todo]!
   nextToken: String
 }
 
