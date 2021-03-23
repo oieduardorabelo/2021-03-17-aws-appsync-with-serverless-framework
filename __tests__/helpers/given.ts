@@ -1,17 +1,19 @@
-import * as Chance from "chance";
+import * as Chance from 'chance';
 
 import * as when from './when';
 
 let ChanceClient = new Chance.default();
 
 type TAnUserWithMultipleTodosInput = {
-  count: number
-}
+  count: number;
+};
 export type TAnUserWithMultipleTodosReturn = {
   id: string;
   teardown: () => Promise<void>;
-}
-async function anUserWithMultipleTodos({ count }: TAnUserWithMultipleTodosInput): Promise<TAnUserWithMultipleTodosReturn> {
+};
+async function anUserWithMultipleTodos({
+  count,
+}: TAnUserWithMultipleTodosInput): Promise<TAnUserWithMultipleTodosReturn> {
   let userId = ChanceClient.string({ length: 8 });
   let todoIds: string[] = [];
 
@@ -23,7 +25,7 @@ async function anUserWithMultipleTodos({ count }: TAnUserWithMultipleTodosInput)
       name,
       points,
     });
-    todoIds.push(todo.id)
+    todoIds.push(todo.id);
   }
 
   return {
@@ -32,11 +34,11 @@ async function anUserWithMultipleTodos({ count }: TAnUserWithMultipleTodosInput)
       let pTodoIds = todoIds.map(async (todoId) => {
         await when.anUserCallsDeleteTodo({
           id: todoId,
-        })
-      })
-      await Promise.all(pTodoIds)
-    }
-  }
+        });
+      });
+      await Promise.all(pTodoIds);
+    },
+  };
 }
 
-export { anUserWithMultipleTodos }
+export { anUserWithMultipleTodos };

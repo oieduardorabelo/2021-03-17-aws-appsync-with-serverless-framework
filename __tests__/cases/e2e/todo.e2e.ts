@@ -1,17 +1,17 @@
-import * as Chance from "chance";
+import * as Chance from 'chance';
 
 import * as codegen from '../../../__codegen__/appsync';
-import * as when from "../../helpers/when";
+import * as when from '../../helpers/when';
 
 let ChanceClient = new Chance.default();
 
-describe("given an user, they can", () => {
+describe('given an user, they can', () => {
   let userId = ChanceClient.string({ length: 8 });
   let name = ChanceClient.sentence({ words: 8 });
   let points = ChanceClient.integer({ min: 0, max: 10000 });
   let todo: codegen.Todo;
 
-  test("create a todo", async () => {
+  test('create a todo', async () => {
     todo = await when.anUserCallsCreateTodo({
       userId,
       name,
@@ -25,7 +25,7 @@ describe("given an user, they can", () => {
     });
   });
 
-  test("read a todo", async () => {
+  test('read a todo', async () => {
     await expect(
       when.anUserCallsReadTodo({
         id: todo.id,
@@ -37,7 +37,7 @@ describe("given an user, they can", () => {
     });
   });
 
-  test("update a todo", async () => {
+  test('update a todo', async () => {
     let nextName = ChanceClient.sentence({ words: 8 });
     let nextPoints = ChanceClient.integer({ min: 0, max: 10000 });
     await expect(
@@ -56,7 +56,7 @@ describe("given an user, they can", () => {
     points = nextPoints;
   });
 
-  test("delete a todo", async () => {
+  test('delete a todo', async () => {
     await expect(
       when.anUserCallsDeleteTodo({
         id: todo.id,

@@ -4,16 +4,16 @@ let { GRAPHQL_API_URL, GRAPHQL_API_KEY } = process.env;
 
 type TRequestInput = {
   query: string;
-  variables: { [key: string]: unknown }
-}
+  variables: { [key: string]: unknown };
+};
 async function request({ query, variables }: TRequestInput) {
   let headers = {
-    'x-api-key': GRAPHQL_API_KEY
+    'x-api-key': GRAPHQL_API_KEY,
   };
 
   try {
     let res = await axios.default({
-      method: "post",
+      method: 'post',
       url: GRAPHQL_API_URL,
       headers,
       data: {
@@ -38,9 +38,9 @@ async function request({ query, variables }: TRequestInput) {
 
 type TThrowOnErrors = {
   query: string;
-  variables: { [key: string]: unknown }
-  errors: axios.AxiosError
-}
+  variables: { [key: string]: unknown };
+  errors: axios.AxiosError;
+};
 function throwOnErrors({ query, variables, errors }: TThrowOnErrors) {
   if (errors) {
     let message = `

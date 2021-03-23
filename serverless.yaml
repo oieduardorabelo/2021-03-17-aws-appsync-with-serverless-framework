@@ -1,6 +1,6 @@
 service: MyProject
 
-frameworkVersion: "2.30.3"
+frameworkVersion: '2.30.3'
 configValidationMode: error
 
 package:
@@ -23,7 +23,7 @@ provider:
   region: ap-southeast-2
   environment:
     STAGE: ${self:custom.stage}
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
 
 custom:
   stage: ${opt:stage, self:provider.stage}

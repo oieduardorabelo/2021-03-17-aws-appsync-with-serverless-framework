@@ -1,8 +1,8 @@
-const _ = require("lodash");
-const dotenv = require("dotenv");
-const fs = require("fs");
-const path = require("path");
-const { promisify } = require("util");
+const _ = require('lodash');
+const dotenv = require('dotenv');
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('util');
 
 module.exports = async function processManifest(manifestData) {
   const stageName = Object.keys(manifestData);
@@ -16,10 +16,10 @@ module.exports = async function processManifest(manifestData) {
     return output.OutputValue;
   };
 
-  const dotEnvFile = path.resolve(".env");
+  const dotEnvFile = path.resolve('.env');
   await updateDotEnv(dotEnvFile, {
-    GRAPHQL_API_URL: getOutputValue("MyProjectAppSyncGraphQlApiUrl"),
-    GRAPHQL_API_KEY: getOutputValue("MyProjectAppSyncGraphQlApiKeyExampleApiKey"),
+    GRAPHQL_API_URL: getOutputValue('MyProjectAppSyncGraphQlApiUrl'),
+    GRAPHQL_API_KEY: getOutputValue('MyProjectAppSyncGraphQlApiKeyExampleApiKey'),
   });
 };
 
@@ -27,24 +27,24 @@ module.exports = async function processManifest(manifestData) {
 async function updateDotEnv(filePath, env) {
   // Merge with existing values
   try {
-    const existing = dotenv.parse(await promisify(fs.readFile)(filePath, "utf-8"));
+    const existing = dotenv.parse(await promisify(fs.readFile)(filePath, 'utf-8'));
     env = Object.assign(existing, env);
   } catch (err) {
-    if (err.code !== "ENOENT") {
+    if (err.code !== 'ENOENT') {
       throw err;
     }
   }
 
   const contents = Object.keys(env)
     .map((key) => format(key, env[key]))
-    .join("\n");
+    .join('\n');
   await promisify(fs.writeFile)(filePath, contents);
 
   return env;
 }
 
 function escapeNewlines(str) {
-  return str.replace(/\n/g, "\\n");
+  return str.replace(/\n/g, '\\n');
 }
 
 function format(key, value) {

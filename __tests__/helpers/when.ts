@@ -1,4 +1,4 @@
-import * as graphql from "./graphql";
+import * as graphql from './graphql';
 
 import * as codegen from '../../__codegen__/appsync';
 
@@ -14,7 +14,7 @@ async function anUserCallsCreateTodo(input: codegen.MutationCreateTodoArgs['inpu
 
   let data = await graphql.request({
     query,
-    variables
+    variables,
   });
 
   let res = data.createTodo;
@@ -33,7 +33,7 @@ async function anUserCallsReadTodo(input: codegen.QueryReadTodoArgs['input']) {
 
   let data = await graphql.request({
     query,
-    variables
+    variables,
   });
 
   let res = data.readTodo;
@@ -52,7 +52,7 @@ async function anUserCallsUpdateTodo(input: codegen.MutationUpdateTodoArgs['inpu
 
   let data = await graphql.request({
     query,
-    variables
+    variables,
   });
 
   let res = data.updateTodo;
@@ -71,7 +71,7 @@ async function anUserCallsDeleteTodo(input: codegen.MutationDeleteTodoArgs['inpu
 
   let data = await graphql.request({
     query,
-    variables
+    variables,
   });
 
   let res = data.deleteTodo;
@@ -93,7 +93,7 @@ async function anUserCallsListTodos(input: codegen.QueryListTodosArgs['input']) 
 
   let data = await graphql.request({
     query,
-    variables
+    variables,
   });
 
   let res = data.listTodos;
@@ -105,5 +105,5 @@ export {
   anUserCallsReadTodo,
   anUserCallsUpdateTodo,
   anUserCallsDeleteTodo,
-  anUserCallsListTodos
-}
+  anUserCallsListTodos,
+};

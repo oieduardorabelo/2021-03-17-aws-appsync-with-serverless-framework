@@ -1,7 +1,7 @@
-import * as given from "../../helpers/given";
-import * as when from "../../helpers/when";
+import * as given from '../../helpers/given';
+import * as when from '../../helpers/when';
 
-describe("given an user, they can", () => {
+describe('given an user, they can', () => {
   let user: given.TAnUserWithMultipleTodosReturn;
   beforeAll(async () => {
     user = await given.anUserWithMultipleTodos({ count: 4 });
@@ -10,7 +10,7 @@ describe("given an user, they can", () => {
     await user.teardown();
   });
 
-  test("read a paginated list of todos", async () => {
+  test('read a paginated list of todos', async () => {
     let list = await when.anUserCallsListTodos({
       userId: user.id,
       limit: 25,
@@ -19,22 +19,22 @@ describe("given an user, they can", () => {
     expect(list.nextToken).toBe(null);
   });
 
-  test("receive a token for next page", async () => {
+  test('receive a token for next page', async () => {
     let list = await when.anUserCallsListTodos({
       userId: user.id,
       limit: 1,
     });
     expect(list.todos).toHaveLength(1);
-    expect(typeof list.nextToken).toBe("string");
+    expect(typeof list.nextToken).toBe('string');
   });
 
-  test("can query for next page of todos", async () => {
+  test('can query for next page of todos', async () => {
     let list1 = await when.anUserCallsListTodos({
       userId: user.id,
       limit: 1,
     });
     expect(list1.todos).toHaveLength(1);
-    expect(typeof list1.nextToken).toBe("string");
+    expect(typeof list1.nextToken).toBe('string');
 
     let list2 = await when.anUserCallsListTodos({
       userId: user.id,
@@ -42,7 +42,7 @@ describe("given an user, they can", () => {
       nextToken: list1.nextToken,
     });
     expect(list2.todos).toHaveLength(1);
-    expect(typeof list2.nextToken).toBe("string");
+    expect(typeof list2.nextToken).toBe('string');
     expect(list2.todos[0].name).not.toBe(list1.todos[0].name);
 
     let list3 = await when.anUserCallsListTodos({
