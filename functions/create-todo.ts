@@ -34,4 +34,4 @@ async function handler(event: AppSyncResolverHandler<codegen.InputCreateTodo, co
   return todo;
 }
 
-module.exports = { handler };
+export { handler };
