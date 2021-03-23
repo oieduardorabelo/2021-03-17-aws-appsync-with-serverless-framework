@@ -1,5 +1,6 @@
 import * as Chance from "chance";
 
+import * as codegen from '../../../__codegen__/appsync';
 import * as when from "../../helpers/when";
 
 let ChanceClient = new Chance.default();
@@ -8,7 +9,7 @@ describe("given an user, they can", () => {
   let userId = ChanceClient.string({ length: 8 });
   let name = ChanceClient.sentence({ words: 8 });
   let points = ChanceClient.integer({ min: 0, max: 10000 });
-  let todo;
+  let todo: codegen.Todo;
 
   test("create a todo", async () => {
     todo = await when.anUserCallsCreateTodo({

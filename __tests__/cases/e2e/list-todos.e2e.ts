@@ -2,7 +2,7 @@ import * as given from "../../helpers/given";
 import * as when from "../../helpers/when";
 
 describe("given an user, they can", () => {
-  let user;
+  let user: given.TAnUserWithMultipleTodosReturn;
   beforeAll(async () => {
     user = await given.anUserWithMultipleTodos({ count: 4 });
   });

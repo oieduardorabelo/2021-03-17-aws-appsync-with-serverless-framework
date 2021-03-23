@@ -1,15 +1,18 @@
 {
   "private": true,
   "scripts": {
-    "sls:deploy": "serverless deploy",
+    "sls:deploy": "serverless deploy --verbose",
     "sls:export-env": "serverless export-env && serverless manifest",
-    "test:e2e": "jest --verbose ./__tests__/cases/e2e"
+    "test:e2e": "jest --verbose ./__tests__/cases/e2e",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "chance": "1.1.7",
     "ulid": "2.3.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.3",
+    "@graphql-codegen/typescript": "1.21.1",
     "@types/aws-lambda": "8.10.72",
     "@types/chance": "1.1.1",
     "@types/jest": "26.0.21",

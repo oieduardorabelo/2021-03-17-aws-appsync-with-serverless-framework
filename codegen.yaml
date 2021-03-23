@@ -1,0 +1,21 @@
+overwrite: true
+schema:
+  - serverless-appsync-aws.graphql
+  - serverless-appsync-schema.graphql
+
+generates:
+  ./__codegen__/appsync.d.ts:
+    plugins:
+      - typescript
+
+config:
+  scalars:
+    AWSJSON: string
+    AWSDate: string
+    AWSTime: string
+    AWSDateTime: string
+    AWSTimestamp: number
+    AWSEmail: string
+    AWSURL: string
+    AWSPhone: string
+    AWSIPAddress: string

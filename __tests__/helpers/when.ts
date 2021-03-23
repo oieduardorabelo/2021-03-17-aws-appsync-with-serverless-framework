@@ -1,8 +1,8 @@
 import * as graphql from "./graphql";
 
-type TInput = { [key: string]: unknown };
+import * as codegen from '../../__codegen__/appsync';
 
-async function anUserCallsCreateTodo(input: TInput) {
+async function anUserCallsCreateTodo(input: codegen.MutationCreateTodoArgs['input']) {
   let query = `mutation createTodo($input: InputCreateTodo!) {
     createTodo(input: $input) {
       id
@@ -21,7 +21,7 @@ async function anUserCallsCreateTodo(input: TInput) {
   return res;
 }
 
-async function anUserCallsReadTodo(input: TInput) {
+async function anUserCallsReadTodo(input: codegen.QueryReadTodoArgs['input']) {
   let query = `query readTodo($input: InputReadTodo!) {
     readTodo(input: $input) {
       id
@@ -40,7 +40,7 @@ async function anUserCallsReadTodo(input: TInput) {
   return res;
 }
 
-async function anUserCallsUpdateTodo(input: TInput) {
+async function anUserCallsUpdateTodo(input: codegen.MutationUpdateTodoArgs['input']) {
   let query = `mutation updateTodo($input: InputUpdateTodo!) {
     updateTodo(input: $input) {
       id
@@ -59,7 +59,7 @@ async function anUserCallsUpdateTodo(input: TInput) {
   return res;
 }
 
-async function anUserCallsDeleteTodo(input: TInput) {
+async function anUserCallsDeleteTodo(input: codegen.MutationDeleteTodoArgs['input']) {
   let query = `mutation deleteTodo($input: InputDeleteTodo!) {
     deleteTodo(input: $input) {
       id
@@ -78,7 +78,7 @@ async function anUserCallsDeleteTodo(input: TInput) {
   return res;
 }
 
-async function anUserCallsListTodos(input: TInput) {
+async function anUserCallsListTodos(input: codegen.QueryListTodosArgs['input']) {
   let query = `query listTodos($input: InputListTodos!) {
     listTodos(input: $input) {
       todos {

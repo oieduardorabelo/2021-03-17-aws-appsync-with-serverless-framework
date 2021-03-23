@@ -7,13 +7,13 @@ let ChanceClient = new Chance.default();
 type TAnUserWithMultipleTodosInput = {
   count: number
 }
-type TAnUserWithMultipleTodosReturn = {
+export type TAnUserWithMultipleTodosReturn = {
   id: string;
   teardown: () => Promise<void>;
 }
 async function anUserWithMultipleTodos({ count }: TAnUserWithMultipleTodosInput): Promise<TAnUserWithMultipleTodosReturn> {
   let userId = ChanceClient.string({ length: 8 });
-  let todosId: string[] = [];
+  let todoIds: string[] = [];
 
   for (let todo = 0; todo <= count; todo += 1) {
     let name = ChanceClient.sentence({ words: 8 });
@@ -23,18 +23,18 @@ async function anUserWithMultipleTodos({ count }: TAnUserWithMultipleTodosInput)
       name,
       points,
     });
-    todosId.push(todo.id)
+    todoIds.push(todo.id)
   }
 
   return {
     id: userId,
     teardown: async () => {
-      while(todosId.length) {
-        let todoId = todosId.pop();
+      let pTodoIds = todoIds.map(async (todoId) => {
         await when.anUserCallsDeleteTodo({
           id: todoId,
         })
-      }
+      })
+      await Promise.all(pTodoIds)
     }
   }
 }
